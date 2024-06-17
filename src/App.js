@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Header from "./components/navbar";
+import Herosection from "./components/hero-section";
+import Projects from "./components/projects";
+import Skills from "./components/skills";
+import About from "./components/about";
+import { AnimatePresence } from "framer-motion";
+import Contact from "./components/contact";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      <Header />
+      <AnimatePresence initial={false} mode="wait">
+        <main
+          className="App"
+          style={{
+            padding: "20px",
+            margin: "10px",
+            maxWidth: "1200px",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Herosection />
+          <About />
+          <Skills />
+          <Projects />
+          <Contact />
+        </main>
+      </AnimatePresence>
+    </>
   );
 }
 
