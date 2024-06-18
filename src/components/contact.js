@@ -7,8 +7,11 @@ import {
   useMediaQuery,
   Button,
   TextField,
+  IconButton,
+  Snackbar,
 } from "@mui/material";
 import { motion } from "framer-motion";
+import { linksContent } from "../content";
 
 const Contact = () => {
   const theme = useTheme();
@@ -18,7 +21,7 @@ const Contact = () => {
     email: "",
     message: "",
   });
-
+  const [open, setOpen] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -29,8 +32,7 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    alert(formData);
+    setOpen(true);
     setFormData({
       name: "",
       email: "",
@@ -52,7 +54,6 @@ const Contact = () => {
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "center",
-        height: { md: "100vh" },
       }}
     >
       <Box
@@ -85,8 +86,23 @@ const Contact = () => {
           }}
         />
       </Box>
-      <Grid container spacing={2} sx={{ maxWidth: "lg", width: "100%" }}>
-        <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
+      <Grid
+        container
+        spacing={2}
+        justifyContent="center"
+        alignItems="center"
+        sx={{ maxWidth: "lg", width: "100%" }}
+      >
+        <Grid
+          item
+          xs={12}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
           <Box
             as="form"
             sx={{
@@ -138,23 +154,37 @@ const Contact = () => {
               Send Message
             </Button>
           </Box>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="body1" sx={{ textAlign: "center" }}>
+          <Typography variant="body1" sx={{ textAlign: "center", pt: 6 }}>
             <Typography variant="body2" color="secondary.dark">
               If you have any questions or would like to collaborate, please
-              don't hesitate to contact me at{" "}
-              <a
-                style={{ color: "inherit" }}
-                href="mailto:pattemchaitu@gmail.com"
+              don't hesitate to contact me
+              <br />
+              {linksContent.map((item) => (
+                <IconButton fontSize="large" key={item.id} href={item.link}>
+                  {item.icon}
+                </IconButton>
+              ))}
+              <Typography
+                sx={{
+                  color: "secondary",
+                  fontSize: { xs: "12px", md: "12px", lg: "16px" },
+                  textAlign: "center",
+                }}
               >
-                pattemchaitu@gmail.com
-              </a>
-              .
+                All Rights Reserved © {new Date().getFullYear()} Chaitanya
+                Pattem
+              </Typography>
             </Typography>
           </Typography>
         </Grid>
       </Grid>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={() => setOpen(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        message="Thanks for Interest. I will get back to you."
+      />
     </Box>
   );
 };

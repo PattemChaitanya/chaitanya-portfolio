@@ -33,7 +33,7 @@ const theme = createTheme({
       dark: alpha(whiteBase, 0.9),
     },
     background: {
-      default: "#393939",
+      default: alpha("#000", 0.7),
       paper: "#292929",
     },
     text: {
@@ -49,34 +49,57 @@ const theme = createTheme({
   typography: {
     fontFamily: ['"Roboto"', '"Helvetica"', '"Arial"', "sans-serif"].join(","),
     h1: {
-      fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
+      fontSize: { sm: "2rem", md: "2.5rem", lg: "3rem" },
       fontWeight: 500,
       letterSpacing: "0.1rem",
       fontFamily: "Poppins, Roboto, Helvetica, Arial, sans-serif",
     },
     h2: {
-      fontSize: { xs: "1.25rem", sm: "1.75rem", md: "2rem" },
+      fontSize: { sm: "1.75rem", md: "2rem", lg: "2.5rem" },
       fontWeight: 500,
       letterSpacing: "0.05rem",
       fontFamily: "Poppins, Roboto, Helvetica, Arial, sans-serif",
     },
     h3: {
-      fontSize: { xs: "1.25rem", sm: "1.5rem", md: "1.75rem" },
+      fontSize: { sm: "1.5rem", md: "1.75rem", lg: "2rem" },
       fontWeight: 400,
       fontFamily: "Poppins, Roboto, Helvetica, Arial, sans-serif",
     },
     h4: {
-      fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
+      fontSize: { sm: "1.25rem", md: "1.5rem", lg: "1.75rem" },
       fontWeight: 400,
       fontFamily: "Poppins, Roboto, Helvetica, Arial, sans-serif",
     },
+    h5: {
+      fontSize: { sm: "0.9375rem", md: "1rem", lg: "1.125rem" },
+      lineHeight: "1.5",
+      fontFamily: "Poppins, Roboto, Helvetica, Arial, sans-serif",
+    },
     body1: {
-      fontSize: { xs: "0.875rem", sm: "0.9375rem", md: "1rem" },
+      fontSize: { sm: "0.9375rem", md: "1rem", lg: "1.125rem" },
       lineHeight: "1.5",
       fontFamily: "Poppins, Roboto, Helvetica, Arial, sans-serif",
     },
     body2: {
-      fontSize: { xs: "0.75rem", sm: "0.8125rem", md: "0.875rem" },
+      fontSize: { sm: "0.8125rem", md: "0.875rem", lg: "0.9375rem" },
+      lineHeight: "1.43",
+      fontFamily: "Poppins, Roboto, Helvetica, Arial, sans-serif",
+    },
+    subtitle1: {
+      fontSize: {
+        sm: "0.6875rem",
+        md: "0.75rem",
+        lg: "0.8125rem",
+      },
+      lineHeight: "1.43",
+      fontFamily: "Poppins, Roboto, Helvetica, Arial, sans-serif",
+    },
+    caption: {
+      fontSize: {
+        sm: "0.6875rem",
+        md: "0.75rem",
+        lg: "0.8125rem",
+      },
       lineHeight: "1.43",
       fontFamily: "Poppins, Roboto, Helvetica, Arial, sans-serif",
     },
@@ -94,18 +117,16 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          backgroundColor: greenBase,
           color: "#FFFFFF",
-          "&:hover": {
-            backgroundColor: "#388E3C",
-          },
+          textTransform: "capitalize",
+          borderColor: "#fff",
         },
       },
     },
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: greenBase,
+          backgroundColor: "#000",
           color: "#FFFFFF",
         },
       },
@@ -121,9 +142,9 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           color: "#FFFFFF",
-          "&-indicator": {
-            backgroundColor: "#388E3C",
-          },
+        },
+        indicator: {
+          backgroundColor: "#fff",
         },
       },
     },
@@ -132,7 +153,7 @@ const theme = createTheme({
         root: {
           color: "#FFFFFF",
           "&.Mui-selected": {
-            color: alpha("#388E3C", 0.5),
+            color: "#fff",
           },
         },
       },
@@ -144,6 +165,30 @@ const theme = createTheme({
           backgroundColor: "black",
           color: whiteBase,
           "& input::placeholder": { color: whiteBase },
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          color: "#FFFFFF",
+          "&:hover": {
+            color: "#bcaaa4",
+          },
+        },
+      },
+    },
+    MuiLinearProgress: {
+      styleOverrides: {
+        root: {
+          height: 5,
+          borderRadius: 5,
+          background: "#000",
+        },
+        bar: {
+          animationDuration: "8s",
+          borderRadius: 5,
+          backgroundColor: "#f0f0f0",
         },
       },
     },

@@ -1,8 +1,7 @@
 export const navbarContent = [
-  { name: "Chaitanya Pattem", shortName: "Chaitanya", id: "/" },
-  { name: "About", shortName: "About", id: "#about" },
-  { name: "Skills", shortName: "Skills", id: "#skills" },
-  { name: "Projects", shortName: "Projects", id: "#projects" },
-  { name: "Contact", shortName: "Contact", id: "#contact" },
-  { name: "Resume", shortName: "Resume", id: "" },
+  { name: "Introduction", shortName: "intro", id: "intro" },
+  { name: "About", shortName: "about", id: "about" },
+  { name: "Skills", shortName: "skills", id: "skills" },
+  { name: "Projects", shortName: "projects", id: "projects" },
+  { name: "Contact", shortName: "contact", id: "contact" },
 ];

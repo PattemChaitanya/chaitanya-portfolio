@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
+import { navbarContent } from "../content/navbar";
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -94,20 +95,19 @@ const Header = () => {
           open={open}
           onClose={handleClose}
         >
-          <MenuItem onClick={() => scrollToSection("intro")}>
-            Introduction
-          </MenuItem>
-          <MenuItem onClick={() => scrollToSection("about")}>About</MenuItem>
-          <MenuItem onClick={() => scrollToSection("skills")}>Skills</MenuItem>
-          <MenuItem onClick={() => scrollToSection("projects")}>
-            Projects
-          </MenuItem>
-          <MenuItem onClick={() => scrollToSection("contact")}>
-            Contact
-          </MenuItem>
+          {navbarContent.map((item) => (
+            <MenuItem key={item.id} onClick={() => scrollToSection(item.id)}>
+              {item.name}
+            </MenuItem>
+          ))}
         </Menu>
-        <Stack sx={{ display: { xs: "none", sm: "block" } }}>
-          <Button color="info" onClick={() => scrollToSection("intro")}>
+        <Stack
+          sx={{
+            display: { xs: "none", sm: "flex" },
+            flexDirection: { xs: "none", sm: "row" },
+          }}
+        >
+          {/* <Button color="info" onClick={() => scrollToSection("intro")}>
             Introduction
           </Button>
           <Button color="info" onClick={() => scrollToSection("about")}>
@@ -121,7 +121,16 @@ const Header = () => {
           </Button>
           <Button color="info" onClick={() => scrollToSection("contact")}>
             Contact
-          </Button>
+          </Button> */}
+          {navbarContent.map((item) => (
+            <Button
+              color="info"
+              key={item.id}
+              onClick={() => scrollToSection(item.id)}
+            >
+              {item.name}
+            </Button>
+          ))}
         </Stack>
       </Toolbar>
     </AppBar>

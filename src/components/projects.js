@@ -1,47 +1,13 @@
 import React from "react";
-import {
-  Box,
-  Typography,
-  Grid,
-  useTheme,
-  useMediaQuery,
-  Card,
-  CardMedia,
-  CardContent,
-} from "@mui/material";
+import { Box, Typography, Grid, useTheme, useMediaQuery } from "@mui/material";
 import { motion } from "framer-motion";
+import { projectsContent } from "../content/projects";
+import LeftView from "./left-view";
+import RightView from "./right-view";
 
 const Projects = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
-  const projects = [
-    {
-      title: "Project 1",
-      description: "This is the first project",
-      image: "/path-to-image.jpg",
-    },
-    {
-      title: "Project 2",
-      description: "This is the second project",
-      image: "/path-to-image.jpg",
-    },
-    {
-      title: "Project 3",
-      description: "This is the third project",
-      image: "/path-to-image.jpg",
-    },
-    {
-      title: "Project 4",
-      description: "This is the third project",
-      image: "/path-to-image.jpg",
-    },
-    {
-      title: "Project 5",
-      description: "This is the third project",
-      image: "/path-to-image.jpg",
-    },
-  ];
 
   return (
     <Box
@@ -55,7 +21,6 @@ const Projects = () => {
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "center",
-        height: isMobile ? "auto" : "100vh",
       }}
     >
       <Box
@@ -67,7 +32,7 @@ const Projects = () => {
           justifyContent: "center",
           alignItems: "center",
           marginTop: isMobile ? "10px" : "20px",
-          mb: 4,
+          mb: 8,
         }}
       >
         <Box
@@ -91,6 +56,7 @@ const Projects = () => {
       <Grid
         container
         spacing={2}
+        columnGap={2}
         sx={{
           maxWidth: "lg",
           width: "100%",
@@ -100,36 +66,18 @@ const Projects = () => {
           justifyContent: "center",
         }}
       >
-        {projects.slice(0, 4).map((project, index) => (
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            md={4}
-            key={index}
-            sx={{ margin: "0 auto" }}
-          >
-            <Card sx={{ maxWidth: 345, mb: 2 }}>
-              <CardMedia
-                component="img"
-                height="140"
-                image={project.image}
-                alt={project.title}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {project.title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {project.description}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
+        {projectsContent
+          .slice(0, 3)
+          .map((project, index) =>
+            project.id % 2 === 0 ? (
+              <LeftView key={index} {...project} />
+            ) : (
+              <RightView key={index} {...project} />
+            )
+          )}
       </Grid>
       <Typography sx={{ textAlign: "center" }}>
-        {projects.length > 4 && "see more"}
+        {projectsContent.length > 4 && "see more"}
       </Typography>
     </Box>
   );

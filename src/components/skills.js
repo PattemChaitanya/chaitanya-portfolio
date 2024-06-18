@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   Box,
+  LinearProgress,
   Tab,
   Tabs,
   Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import TabPanel from "./tab-panel";
+import { skillsWithProgress, someExtrakills, workExperience } from "../content";
 
 const Skills = () => {
   const [tabValue, setTabValue] = useState(0);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const refContent = useRef(null);
+  const inViewContent = useInView(refContent);
 
   const handleChange = (event, newValue) => {
     setTabValue(newValue);
@@ -22,10 +27,6 @@ const Skills = () => {
   return (
     <Box
       id="skills"
-      component={motion.div}
-      initial={{ opacity: 0, y: -50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1 }}
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -64,97 +65,174 @@ const Skills = () => {
           }}
         />
       </Box>
-      <Box
-        component={motion.div}
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, delay: 0.5 }}
-        sx={{ width: isMobile ? "100%" : "80%", marginTop: "40px" }}
-      >
+      <Box sx={{ width: isMobile ? "100%" : "90%", marginTop: "40px" }}>
         <Box>
           <Tabs
             value={tabValue}
             onChange={handleChange}
             aria-label="skills and experience tabs"
-            variant={isMobile ? "scrollable" : "centered"}
-            scrollButtons={isMobile ? "auto" : "off"}
-            allowScrollButtonsMobile
+            variant={isMobile ? "fullWidth" : "centered"}
             orientation="horizontal"
+            sx={{ pb: 2 }}
           >
-            <Tab label="Personal Skills" />
-            <Tab label="Work Experience" />
+            <Tab
+              label="Personal Skills"
+              sx={{
+                textTransform: "capitalize",
+                fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
+              }}
+            />
+            <Tab
+              label="Work Experience"
+              sx={{
+                textTransform: "capitalize",
+                fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
+              }}
+            />
           </Tabs>
-          <Box sx={{ flexGrow: 1 }}>
+          <Box
+            sx={{ flexGrow: 1 }}
+            component={motion.div}
+            ref={refContent}
+            initial={{ opacity: 0, filter: "blur(6px)" }}
+            animate={
+              inViewContent
+                ? { opacity: 1, filter: "blur(0px)" }
+                : { opacity: 1, filter: "blur(6px)" }
+            }
+            transition={{ duration: 1 }}
+          >
             <TabPanel value={tabValue} index={0}>
-              <Typography variant="body1" sx={{ whiteSpace: "pre-line" }}>
-                - Skill 1: Description of skill 1<br />
-                - Skill 2: Description of skill 2<br />
-                - Skill 3: Description of skill 3<br />
-                - Skill 4: Description of skill 4<br />
+              <Typography
+                variant="body1"
+                sx={{
+                  whiteSpace: "pre-line",
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  py: 2,
+                }}
+              >
+                {skillsWithProgress.map((item) => (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      width: isMobile ? "100%" : "33%",
+                      pb: 2,
+                    }}
+                  >
+                    <Typography
+                      variant="h3"
+                      sx={{ width: "95%", pb: 2, textTransform: "capitalize" }}
+                      textAlign="left"
+                      pl={1}
+                    >
+                      {item.name}
+                    </Typography>
+                    <LinearProgress
+                      variant="determinate"
+                      sx={{ width: isMobile ? "100%" : "85%" }}
+                      value={item.knownPercentage}
+                    />
+                  </Box>
+                ))}
+              </Typography>
+              <Typography variant="h2" textAlign="left" py={3}>
+                Used tools and practices in my development:
+              </Typography>
+              <Typography
+                component={"ol"}
+                variant="body1"
+                sx={{
+                  whiteSpace: "pre-line",
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  pl: "20px",
+                }}
+              >
+                {someExtrakills.map((item) => (
+                  <Box
+                    component={"li"}
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      flexWrap: "wrap",
+                      width: isMobile ? "95%" : "33%",
+                    }}
+                  >
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        width: "100%",
+                        textTransform: "capitalize",
+                        textAlign: "left",
+                      }}
+                    >
+                      &#x2022; {item}
+                    </Typography>
+                  </Box>
+                ))}
               </Typography>
             </TabPanel>
             <TabPanel value={tabValue} index={1}>
-              <Typography variant="body1" sx={{ whiteSpace: "pre-line" }}>
-                <ul>
-                  <motion.li
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1 }}
-                    whileHover={{ scale: 1.1 }}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1 }}
+                style={{ textAlign: "left" }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    fontWeight: 600,
+                  }}
+                >
+                  <Typography variant={isMobile ? "h3" : "h2"}>
+                    Software Engineer
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: !isMobile ? "14px" : "12px",
+                      p: "5px 8px",
+                    }}
                   >
-                    <Typography variant="h5" sx={{ fontWeight: 600 }}>
-                      SDE Intern{" "}
-                      <Typography
-                        variant="body2"
-                        component="span"
-                        sx={{ fontWeight: 500 }}
-                      >
-                        {" "}
-                        - FinGPT
-                      </Typography>
-                    </Typography>
+                    @ Futuristic Labs
+                  </Typography>
+                </Box>
+                <Box component={"ul"} sx={{ paddingInlineStart: "25px" }}>
+                  {workExperience.map((item, index) => (
                     <Box
+                      component={"li"}
+                      key={index}
                       sx={{
-                        mt: 2,
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 1,
-                      }}
-                    >
-                      <Box
-                        sx={{
-                          width: "15px",
-                          height: "2px",
-                          backgroundColor: "text.primary",
-                        }}
-                      />
-                      <Typography variant="body1">
-                        Working on a trading platform for a stealth-mode startup
-                        based in California, USA. Integrating AI capabilities
-                        and enhancing user experience of the platform using
-                        Next.js, TypeScript, NextAuth, Tailwind CSS, React Query
-                        and Open AI.
-                      </Typography>
-                    </Box>
-                    <Box
-                      sx={{
-                        ml: 6,
                         mt: 1,
-                        color: "grey.500",
-                        fontWeight: "medium",
-                        display: "flex",
-                        justifyContent: "space-between",
-                        maxWidth: "95%",
                       }}
                     >
-                      <Typography variant="body2">
-                        Jan 2024 - Present
-                      </Typography>
-                      <Typography variant="body2">Remote</Typography>
+                      <Typography variant="body1">{item}</Typography>
                     </Box>
-                  </motion.li>
-                </ul>
-              </Typography>
+                  ))}
+                </Box>
+                <Box
+                  sx={{
+                    ml: { sm: 6, md: 1 },
+                    mt: 1,
+                    color: "grey.500",
+                    fontWeight: "medium",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    maxWidth: "100%",
+                    mr: !isMobile && 10,
+                  }}
+                >
+                  <Typography variant="body2">Sep 2022 - Present</Typography>
+                  <Typography variant="body2">Hyderabad</Typography>
+                </Box>
+              </motion.div>
             </TabPanel>
           </Box>
         </Box>

@@ -1,6 +1,7 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { motion } from "framer-motion";
+import { heroSectionContent } from "../content";
 
 const Herosection = () => {
   return (
@@ -13,13 +14,73 @@ const Herosection = () => {
       sx={{
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
+        alignItems: "flex-start",
+        flexDirection: "column",
         height: "100vh",
+        rowGap: 2,
+        width: { sm: "100%", md: "80%" },
+        pt: { sm: "20px", md: 0 },
+        textAlign: "left",
       }}
     >
-      <Typography variant="h2" component="h1">
-        Hero Section
+      <Typography variant="caption" color="#64ffda" mb={1}>
+        {heroSectionContent.content_1}
       </Typography>
+      <Typography
+        color="secondary"
+        variant="h1"
+        sx={{
+          fontSize: { sm: "32px", md: "3rem" },
+          color: "#fff",
+          mb: "-10px",
+        }}
+      >
+        {heroSectionContent.content_2}
+      </Typography>
+      <Typography
+        variant="h3"
+        sx={{ fontSize: { sm: "28px", md: "2rem" } }}
+        color="secondary.light"
+      >
+        {heroSectionContent.content_3}
+      </Typography>
+      <Typography
+        variant="body2"
+        color="secondary"
+        sx={{ width: { sm: "100%", md: "70%" }, mt: 2 }}
+      >
+        {heroSectionContent.content_4}
+        <Button
+          component={"a"}
+          href="https://www.futuristiclabs.io/"
+          target="_blank"
+          sx={{
+            fontSize: { xs: "0.75rem", sm: "0.8125rem", md: "0.875rem" },
+            textDecoration: "none",
+            p: 0,
+            color: "#64ffda",
+            "&:hover": {
+              textDecoration: "underline",
+              textDecorationStyle: "solid",
+              textDecorationColor: "#64ffda",
+              textDecorationThickness: "2px",
+              textDecorationSkipInk: "none",
+              transition: "width 0.3s ease-in-out",
+            },
+          }}
+        >
+          Futuristic Labs.
+        </Button>
+      </Typography>
+      <br />
+      <Button
+        variant="outlined"
+        target="_blank"
+        href={heroSectionContent.file_path}
+        sx={{ p: "10px 40px", fontSize: { sm: "24px", md: "20px" }, mt: 2 }}
+      >
+        Resume
+      </Button>
     </Box>
   );
 };
