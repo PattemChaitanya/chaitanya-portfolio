@@ -21,6 +21,7 @@ const Contact = () => {
     email: "",
     message: "",
   });
+  const [name, setName] = useState("");
   const [open, setOpen] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,6 +34,7 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setOpen(true);
+    setName(formData.name);
     setFormData({
       name: "",
       email: "",
@@ -76,7 +78,7 @@ const Contact = () => {
           }}
         />
         <Typography variant="h2" component="h1" px={2}>
-          Contact Section
+          Contact
         </Typography>
         <Box
           sx={{
@@ -183,7 +185,9 @@ const Contact = () => {
         autoHideDuration={6000}
         onClose={() => setOpen(false)}
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        message="Thanks for Interest. I will get back to you."
+        message={`Hey hi, ${name.slice(0, 1).toUpperCase()}${name.slice(
+          1
+        )}. Thanks for your interest. I will get back to you.`}
       />
     </Box>
   );

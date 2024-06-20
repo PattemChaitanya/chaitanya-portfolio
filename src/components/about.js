@@ -41,7 +41,7 @@ const About = () => {
           }}
         />
         <Typography variant="h2" component="h1" px={2}>
-          About Section
+          About
         </Typography>
         <Box
           sx={{
@@ -70,7 +70,11 @@ const About = () => {
             src={aboutContent.image}
             loading="lazy"
             alt={aboutContent.imageAltname}
-            style={{ width: "100%", height: "auto", borderRadius: "8px" }}
+            style={{
+              width: isMobile ? "100%" : "80%",
+              height: isMobile ? "300px" : "80%",
+              borderRadius: "8px",
+            }}
           />
         </Grid>
         <Grid item xs={12} md={7}>

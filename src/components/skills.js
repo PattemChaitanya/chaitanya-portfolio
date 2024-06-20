@@ -55,7 +55,7 @@ const Skills = () => {
           }}
         />
         <Typography variant="h2" component="h1" px={2}>
-          Skills Section
+          Skills
         </Typography>
         <Box
           sx={{
@@ -179,12 +179,7 @@ const Skills = () => {
               </Typography>
             </TabPanel>
             <TabPanel value={tabValue} index={1}>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1 }}
-                style={{ textAlign: "left" }}
-              >
+              <Box sx={{ textAlign: "left" }}>
                 <Box
                   sx={{
                     display: "flex",
@@ -232,7 +227,7 @@ const Skills = () => {
                   <Typography variant="body2">Sep 2022 - Present</Typography>
                   <Typography variant="body2">Hyderabad</Typography>
                 </Box>
-              </motion.div>
+              </Box>
             </TabPanel>
           </Box>
         </Box>

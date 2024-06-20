@@ -55,7 +55,7 @@ const Herosection = () => {
           href="https://www.futuristiclabs.io/"
           target="_blank"
           sx={{
-            fontSize: { xs: "0.75rem", sm: "0.8125rem", md: "0.875rem" },
+            fontSize: { sm: "0.8125rem", md: "0.875rem", lg: "0.9375rem" },
             textDecoration: "none",
             p: 0,
             color: "#64ffda",
@@ -77,7 +77,7 @@ const Herosection = () => {
         variant="outlined"
         target="_blank"
         href={heroSectionContent.file_path}
-        sx={{ p: "10px 40px", fontSize: { sm: "24px", md: "20px" }, mt: 2 }}
+        sx={{ p: "10px 40px", fontSize: { sm: "24px", md: "20px" } }}
       >
         Resume
       </Button>

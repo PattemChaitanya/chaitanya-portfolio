@@ -14,6 +14,6 @@ export const aboutContent = {
               optimized for mobile devices. My track record demonstrates
               effective team collaboration and consistently delivering
               high-quality products within deadlines.`,
-  image: "/images/myPics.JPG",
+  image: "/images/myPics.png",
   imageAltname: "my image",
 };

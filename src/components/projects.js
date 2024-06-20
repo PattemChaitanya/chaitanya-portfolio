@@ -43,7 +43,7 @@ const Projects = () => {
           }}
         />
         <Typography variant="h2" component="h1" px={2}>
-          Projects Section
+          Projects
         </Typography>
         <Box
           sx={{
