@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { heroSectionContent } from "../content";
+import sendAnalyticsData from "../config/analytics";
+import { analytics } from "../config/firebase-config";
+import { logEvent } from "firebase/analytics";
 
 const Herosection = () => {
+  useEffect(() => {
+    sendAnalyticsData({
+      eventName: "user_added",
+      type: "viewing_portfolio",
+    });
+  }, []);
+
   return (
     <Box
       id="intro"
@@ -78,6 +88,12 @@ const Herosection = () => {
         target="_blank"
         href={heroSectionContent.file_path}
         sx={{ p: "10px 40px", fontSize: { sm: "24px", md: "20px" } }}
+        onClick={() => {
+          logEvent(analytics, "resume_button_click", {
+            button_name: "resumeButton",
+            click_time: new Date().toISOString(),
+          });
+        }}
       >
         Resume
       </Button>

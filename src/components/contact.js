@@ -12,6 +12,9 @@ import {
 } from "@mui/material";
 import { motion } from "framer-motion";
 import { linksContent } from "../content";
+import { v4 as uuidv4 } from "uuid";
+import { firestore } from "../config/firebase-config";
+import { doc, setDoc } from "firebase/firestore";
 
 const Contact = () => {
   const theme = useTheme();
@@ -31,10 +34,12 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const uid = uuidv4();
     setOpen(true);
     setName(formData.name);
+    await setDoc(doc(firestore, "user-data", uid), { ...formData, id: uid });
     setFormData({
       name: "",
       email: "",
